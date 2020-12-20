@@ -20,7 +20,7 @@ Condiciones para entregar tu proyecto
 
 - Enlace al proyecto sobre un repositorio: envía el enlace a tu proyecto sobre un repositorio. Si aún no tienes repositorio, crea tu usuario gratuito en GitHub, GitLab, Bitbucket o cualquier otra plataforma que trabaje con GIT.
 
-## Condiciones para aprobar
+### Condiciones para aprobar
 
 - Condición 1: Poder registrar un nuevo usuario.
 
