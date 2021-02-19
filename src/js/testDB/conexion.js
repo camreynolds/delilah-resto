@@ -1,5 +1,5 @@
+require("dotenv").config();
 const Sequalize = require("sequelize");
-const dontEnv = require("dotenv").config();
 const sequelize = new Sequalize(process.env.BASE_URL);
 
 sequelize.authenticate()
