@@ -349,5 +349,10 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+#------------------------- EDICIÓN DE ARCHIVO .gitignore -----------------------------
+
 # Carpeta archivos de ejemplo Acamica - delilah-exports
 delilah_exports/
+
+# Archivo de Variables de Entorno del proyecto
+.env
