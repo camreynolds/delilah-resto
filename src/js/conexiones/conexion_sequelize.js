@@ -1,6 +1,6 @@
 require("dotenv").config();
-const Sequalize = require("sequelize");
-const sequelize = new Sequalize(process.env.BASE_URL);
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize('mysql://root@localhost:3306/delilah_resto');
 
 sequelize.authenticate()
     .then(function(){
