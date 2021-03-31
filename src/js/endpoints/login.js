@@ -6,16 +6,19 @@ app.post("/login", async (req, res) => {
     console.log("Proviene del Body: " + JSON.stringify(req.body));
 
     let nombreTabla = 'usuarios';
-    let nombreColumna_1 = 'nickname';
-    let nombreColumna_2 = 'email';
+    let nombreNickname = 'nickname';
+    let nombreEmail = 'email';
+    let nombreContrasenna = "contrasenna";
     let usuarioNickname = req.body.nickname;
     let usuarioEmail = req.body.email;
-    let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ${nombreColumna_1} = "${usuarioNickname}" OR ${nombreColumna_2} = "${usuarioEmail}" `;
+    let usuarioContrasenna = req.body.contrasenna;
+    let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ( ${nombreNickname} = "${usuarioNickname}" OR ${nombreEmail} = "${usuarioEmail}" ) AND ( ${nombreContrasenna} = "${usuarioContrasenna}" )`;
     /*
-    let tipoDeQuery = `SELECT ${nombreColumna_1} FROM ${nombreTabla} WHERE ${nombreColumna_1} = "${usuarioNickname}"`;
+    let tipoDeQuery = `SELECT ${nombreNickname} FROM ${nombreTabla} WHERE ${nombreNickname} = "${usuarioNickname}"`;
     */
     console.log("Variable que almacema el req.body.nickname: " + usuarioNickname);
     console.log("Variable que almacema el req.body.email: " + usuarioEmail);
+    console.log("Variable que almacema el req.body.contrasenna: " + usuarioContrasenna);
     
     console.log(" **** **** **** **** **** **** **** **** **** **** **** ");
     
@@ -31,7 +34,7 @@ app.post("/login", async (req, res) => {
                 });
             }else{
                 res.status(400).json({
-                    Mensaje: "Solicitud no procesada."
+                    Mensaje: "Nombre de usuario/email o contraseña inválidos."
                 });
             };
         })
