@@ -13,9 +13,7 @@ app.post("/login", async (req, res) => {
     let usuarioEmail = req.body.email;
     let usuarioContrasenna = req.body.contrasenna;
     let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ( ${nombreNickname} = "${usuarioNickname}" OR ${nombreEmail} = "${usuarioEmail}" ) AND ( ${nombreContrasenna} = "${usuarioContrasenna}" )`;
-    /*
-    let tipoDeQuery = `SELECT ${nombreNickname} FROM ${nombreTabla} WHERE ${nombreNickname} = "${usuarioNickname}"`;
-    */
+    
     console.log("Variable que almacema el req.body.nickname: " + usuarioNickname);
     console.log("Variable que almacema el req.body.email: " + usuarioEmail);
     console.log("Variable que almacema el req.body.contrasenna: " + usuarioContrasenna);
@@ -43,17 +41,5 @@ app.post("/login", async (req, res) => {
             res.status(400).json({
                 Mensaje: "Error en la petición."
             });
-        });
-   
-    /*
-    ---- ESTA PARTE ESTA COMENTADA ----
-    let usuarioNickname = req.body.nickname;
-    let usuarioEmail = req.body.email;
-    let usuarioContrasenna = req.body.contrasenna;
-        
-    if( (usuarioNickname === "carlos" || usuarioEmail === "carlos@dominio.com") && usuarioContrasenna === "123abc" ){
-        res.status(200).json({Mensaje: "OK"});
-    };
-    */
-    
+        });    
 });
