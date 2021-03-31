@@ -6,13 +6,13 @@ app.post("/login", async (req, res) => {
     console.log("Proviene del Body: " + JSON.stringify(req.body));
 
     let nombreTabla = 'usuarios';
-    let nombreNickname = 'nickname';
-    let nombreEmail = 'email';
-    let nombreContrasenna = "contrasenna";
+    let columnaNickname = 'nickname';
+    let columnaEmail = 'email';
+    let columnaContrasenna = "contrasenna";
     let usuarioNickname = req.body.nickname;
     let usuarioEmail = req.body.email;
     let usuarioContrasenna = req.body.contrasenna;
-    let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ( ${nombreNickname} = "${usuarioNickname}" OR ${nombreEmail} = "${usuarioEmail}" ) AND ( ${nombreContrasenna} = "${usuarioContrasenna}" )`;
+    let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ( ${columnaNickname} = "${usuarioNickname}" OR ${columnaEmail} = "${usuarioEmail}" ) AND ( ${columnaContrasenna} = "${usuarioContrasenna}" )`;
     
     console.log("Variable que almacema el req.body.nickname: " + usuarioNickname);
     console.log("Variable que almacema el req.body.email: " + usuarioEmail);
