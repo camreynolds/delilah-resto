@@ -2,8 +2,9 @@ require ("dotenv").config;
 const express = require("express");
 const jwt = require('jsonwebtoken');
 const app = express();
+const jwtClave = "claveSegura";
 
-app.use(express.json({limit: '10Kb'}));
+app.use(express.json({limit: "100kb"}));
 app.use(logger);
 
 app.listen(3000, function(){
