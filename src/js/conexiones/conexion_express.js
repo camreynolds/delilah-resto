@@ -1,21 +1,19 @@
 require ("dotenv").config;
 const express = require("express");
-const jwt = require('jsonwebtoken');
 const app = express();
-const jwtClave = "claveSegura";
 
 app.use(express.json({limit: "100kb"}));
 app.use(logger);
-
-app.listen(3000, function(){
-    console.log("Conexión a express establecida...");
-});
 
 function logger(req, res, next){
     const {method, path, query, body} = req;
     console.log(`Método: ${method} - Ruta: ${path} - Query: ${JSON.stringify(query)} - Body: ${JSON.stringify(body)}`);
     next();
 };
+
+app.listen(3000, function(){
+    console.log("Conexión a express establecida...");
+});
 
 app.use( (error, req, res, next)=>{
     if(error){

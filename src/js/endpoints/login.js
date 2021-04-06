@@ -1,5 +1,27 @@
 const app = require('../conexiones/conexion_express.js');
 const sequelize = require('../conexiones/conexion_sequelize.js');
+const jwt = require("jsonwebtoken");
+const jwtClave = "clave";
+
+usuarioNoAutorizado = (res) => {
+    res.status(401).json({Mensaje: "Usuario no autorizado."});
+};
+
+verificarToken = (req, res, next) => {
+    let token = req.headers.authorization;
+    console.log(token);
+    if(token){
+        token = token.split(" ")[1];
+        let decodificado = jwt.verify(token, jwtClave);
+        console.log(decodificado);
+        if(!decodificado){
+            usuarioNoAutorizado(res);
+        };
+        next();
+    }else{
+        usuarioNoAutorizado(res);
+    };
+};
 
 // Endpoint para logear usuarios registrados.
 app.post("/login", async (req, res) => {
