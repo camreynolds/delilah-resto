@@ -48,9 +48,11 @@ app.post("/login", async (req, res) => {
             let validar = data[0].existe;
             console.log("Validar: " + validar);
             if(validar === 1){
+                let token = jwt.sign({usuario: usuarioNickname}, jwtClave);
                 res.status(200).json({
                     Mensaje: "OK",
-                    Data: data[0].existe
+                    Data: data[0].existe,
+                    Token: token
                 });
             }else{
                 res.status(400).json({
