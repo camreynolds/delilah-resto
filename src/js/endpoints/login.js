@@ -3,26 +3,6 @@ const sequelize = require('../conexiones/conexion_sequelize.js');
 const jwt = require("jsonwebtoken");
 const jwtClave = "clave";
 
-usuarioNoAutorizado = (res) => {
-    res.status(401).json({Mensaje: "Usuario no autorizado."});
-};
-
-verificarToken = (req, res, next) => {
-    let token = req.headers.authorization;
-    console.log(token);
-    if(token){
-        token = token.split(" ")[1];
-        let decodificado = jwt.verify(token, jwtClave);
-        console.log(decodificado);
-        if(!decodificado){
-            usuarioNoAutorizado(res);
-        };
-        next();
-    }else{
-        usuarioNoAutorizado(res);
-    };
-};
-
 // Endpoint para logear usuarios registrados.
 app.post("/login", async (req, res) => {
     console.log("Proviene del Body: " + JSON.stringify(req.body));
@@ -66,4 +46,14 @@ app.post("/login", async (req, res) => {
                 Mensaje: "Error en la petición."
             });
         });    
+});
+
+app.use( (error, req, res, next)=>{
+    if(error){
+        console.error("Mensaje error del servidor: " + error);
+        res.status(500).json({
+            Mensaje: 'Error interno del servidor.'
+        });
+    };
+    next();
 });

@@ -45,3 +45,13 @@ app.get('/usuarios', async (req, res) => {
             });
         });
 });
+
+app.use( (error, req, res, next)=>{
+    if(error){
+        console.error("Mensaje error del servidor: " + error);
+        res.status(500).json({
+            Mensaje: 'Error interno del servidor.'
+        });
+    };
+    next();
+});
