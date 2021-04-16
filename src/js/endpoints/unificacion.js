@@ -139,6 +139,40 @@ app.post("/productos", verificarToken, (req, res) => {
         });
 });
 
+//Endpoint para borrar productos.
+app.post("/productos/borrar", async (req, res) => {
+    let nombreTabla = 'productos';
+    let columnaNombrePlato = 'nombre_plato';
+    //let nombrePlato = req.body.nombre_plato;
+    let nombrePlato = "Hamburguesa clásica";
+    let tipoDeQuery = `SELECT count(1) AS existe FROM ${nombreTabla} WHERE ${columnaNombrePlato} = "${nombrePlato}"`;
+    
+    console.log("Nombre de la columna: " + columnaNombrePlato);
+    console.log(typeof columnaNombrePlato);
+    console.log("Resultado de Tipo de Query: " + tipoDeQuery);
+    console.log("Este es el nombre del plato: " + nombrePlato);
+  
+    if(tipoDeQuery){
+        //await  sequelize.query(`'DELETE FROM ${nombreTabla} WHERE ${columnaNombrePlato} = "${nombrePlato}"`)
+        await  sequelize.query("DELETE FROM productos WHERE nombre_plato = ?", {replacements: [nombrePlato]})
+            .then(data => {
+                console.log('Data log de borrado: ' + data);
+                res.status(200).json({
+                    Mensaje: "Producto borrado exitosamente."
+                });
+            })
+            .catch( e => {
+                console.error("Error del endpoint de borrado: " + e);
+                res.status(408).json({
+                    Mensaje: "No se pudo borrar el producto."
+                });
+            });
+        
+    }else{
+        res.status(400).json({Mensaje: "error de prueba."})
+    };
+});
+
 // Endpoint global de errores.
 app.use( (error, req, res, next)=>{
     if(error){
